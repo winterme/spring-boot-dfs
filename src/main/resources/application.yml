@@ -1,0 +1,11 @@
+server:
+  port: 82
+
+spring:
+  servlet:
+    multipart:
+      max-request-size: 1000MB
+      max-file-size: 1000MB
+
+basepath: /usr/local/nginx1.3/html/file/
+logpath: /usr/local/java-jar/dfs.log
