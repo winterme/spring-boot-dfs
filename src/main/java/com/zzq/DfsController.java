@@ -33,10 +33,7 @@ public class DfsController {
         String path = saveFile(file);
         if (path != null) {
             HashMap<String, String> result = new HashMap<>();
-            result.put("link1", "http://103.118.42.35:82/download?path=" + path.replace(basepath, "/"));
-            result.put("link2", "http://103.118.42.35:81/file/" + path.replace(basepath, "/"));
-            result.put("loglink", "http://103.118.42.35:82/seelog");
-            result.put("rmark", "可以通过loglink 查看上传进度");
+            result.put("link1", "/download?path=" + path);
 
             return Result.scuess(result);
         } else {
@@ -110,7 +107,7 @@ public class DfsController {
             }
             outputStream.flush();
 
-            return path;
+            return path.replace(basepath,"/");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -120,6 +117,7 @@ public class DfsController {
     }
 
     public void writeFile(String path, HttpServletResponse response) throws IOException {
+        path = basepath + "/" + path;
         File file = new File(path);
         if (!file.exists()) {
             response.getWriter().print(path + "==>文件不存在！");
